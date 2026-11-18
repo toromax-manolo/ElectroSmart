@@ -1,0 +1,287 @@
+<!-- ========================================== -->
+<!-- PANTALLA 1: LOGIN / AUTENTICACIÓN          -->
+<!-- ========================================== -->
+<div *ngIf="vistaActual === 'login'" class="min-h-screen flex bg-[#F4F7FB] font-sans">
+  <!-- Panel Izquierdo Oscuro -->
+  <div class="hidden lg:flex lg:w-1/3 bg-[#021226] text-white flex-col justify-between p-10 relative overflow-hidden">
+    <div class="flex items-center gap-3 z-10">
+      <div class="w-9 h-9 rounded-lg bg-[#0052D4] flex items-center justify-center font-bold text-xl">E</div>
+      <span class="text-2xl font-bold tracking-tight">Electro<span class="text-[#00A8FF]">Smart</span></span>
+    </div>
+    
+    <div class="z-10 flex items-center gap-3 text-sm text-slate-300">
+      <span class="w-8 h-8 rounded-full border border-[#00A8FF] flex items-center justify-center text-[#00A8FF]">✓</span>
+      <div>
+        <p class="font-semibold text-white">Compra segura.</p>
+        <p>Opiniones reales.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor Derecho -->
+  <div class="flex-1 flex flex-col items-center justify-center p-6 relative">
+    <span class="absolute top-6 right-6 bg-white border border-slate-200 text-xs text-slate-600 px-3 py-1.5 rounded-lg shadow-sm">
+      Pantalla 1 · Autenticación
+    </span>
+
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-lg border border-slate-100 p-8">
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 rounded-full bg-[#021226] text-[#00A8FF] font-bold text-2xl flex items-center justify-center mx-auto mb-3">E</div>
+        <h1 class="text-2xl font-bold text-[#021226]">Electro<span class="text-[#00A8FF]">Smart</span></h1>
+        <p class="text-xs text-slate-400">Compra tecnología con confianza</p>
+      </div>
+
+      <h2 class="text-xl font-bold text-center text-slate-800">Bienvenido a ElectroSmart</h2>
+      <p class="text-xs text-center text-slate-500 mb-6">Inicia sesión para comprar y dejar reseñas</p>
+
+      <form (ngSubmit)="iniciarSesion()" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Correo electrónico</label>
+          <input type="email" [(ngModel)]="correo" name="correo" placeholder="usuario@electrosmart.com"
+            class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#0052D4]" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">Contraseña</label>
+          <input type="password" [(ngModel)]="password" name="password" placeholder="••••••••"
+            class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#0052D4]" />
+        </div>
+
+        <button type="submit"
+          class="w-full bg-[#0052D4] hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm transition flex items-center justify-center gap-2">
+          Iniciar sesión <span>→</span>
+        </button>
+      </form>
+
+      <div class="my-5 text-center text-xs text-slate-400">o</div>
+
+      <div class="space-y-3 text-center">
+        <button (click)="iniciarSesion()" class="text-xs font-semibold text-[#0052D4] hover:underline">Crear una cuenta</button>
+        <button (click)="iniciarSesion()"
+          class="w-full border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium py-2.5 rounded-lg text-xs transition">
+          👤 Continuar como invitado
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========================================== -->
+<!-- PANTALLA 2: CATÁLOGO DE PRODUCTOS (SQL)     -->
+<!-- ========================================== -->
+<div *ngIf="vistaActual === 'catalogo'" class="min-h-screen bg-[#F4F7FB] font-sans">
+  <!-- Navbar Superior -->
+  <header class="bg-[#021226] text-white px-6 py-3.5 flex items-center justify-between gap-4">
+    <div class="text-xl font-bold">Electro<span class="text-[#00A8FF]">Smart</span></div>
+    
+    <div class="flex-1 max-w-xl">
+      <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar productos, categorías o marcas"
+        class="w-full bg-white text-slate-800 text-sm px-4 py-2 rounded-lg focus:outline-none" />
+    </div>
+
+    <div class="flex items-center gap-5 text-sm">
+      <button (click)="cerrarSesion()" class="hover:text-[#00A8FF]">👤 Mi cuenta ▾</button>
+      <span class="bg-[#0052D4] px-3 py-1 rounded-full text-xs font-semibold">🛒 Carrito (0)</span>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-4">
+      <span class="bg-white border border-slate-200 text-xs text-[#0052D4] font-medium px-3 py-1 rounded-full">
+        🗄️ Consulta · Productos
+      </span>
+      <span class="bg-white border border-slate-200 text-xs text-slate-600 px-3 py-1 rounded-lg">
+        Pantalla 2 · Catálogo
+      </span>
+    </div>
+
+    <h1 class="text-3xl font-bold text-[#021226]">Tecnología para todos los días</h1>
+    <p class="text-sm text-slate-500 mb-6">Consulta precios y stock en tiempo real</p>
+
+    <!-- Barra de Filtros -->
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-4 gap-4 items-end mb-6">
+      <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Categoría</label>
+        <select [(ngModel)]="categoriaSeleccionada" class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+          <option value="Todas">Todas las categorías</option>
+          <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Marca</label>
+        <select [(ngModel)]="marcaSeleccionada" class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+          <option value="Todas">Todas las marcas</option>
+          <option value="TechNova">TechNova</option>
+          <option value="SonicPro">SonicPro</option>
+          <option value="Apple">Apple</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Disponibilidad</label>
+        <select class="w-full border border-slate-200 rounded-lg p-2 text-sm">
+          <option>Todos</option>
+          <option>En stock</option>
+        </select>
+      </div>
+      <button class="bg-[#0052D4] text-white font-medium py-2 px-4 rounded-lg text-sm hover:bg-blue-700">
+        ▽ Filtrar
+      </button>
+    </div>
+
+    <!-- Layout Principal -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <aside class="space-y-4">
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+          <h3 class="text-xs font-bold text-[#0052D4] uppercase tracking-wider mb-3">☰ Categorías</h3>
+          <ul class="space-y-1 text-sm">
+            <li (click)="categoriaSeleccionada = 'Todas'"
+              [class.bg-blue-50]="categoriaSeleccionada === 'Todas'"
+              [class.text-[#0052D4]]="categoriaSeleccionada === 'Todas'"
+              class="px-3 py-2 rounded-lg cursor-pointer font-medium hover:bg-slate-50">
+              Todos los productos
+            </li>
+            <li *ngFor="let cat of categorias" (click)="categoriaSeleccionada = cat"
+              [class.bg-blue-50]="categoriaSeleccionada === cat"
+              [class.text-[#0052D4]]="categoriaSeleccionada === cat"
+              class="px-3 py-2 rounded-lg cursor-pointer text-slate-600 hover:bg-slate-50">
+              {{ cat }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 text-xs">
+          <p class="font-bold text-[#0052D4] mb-1">🗄️ Inventario actualizado</p>
+          <p class="text-slate-600">Datos en tiempo real desde nuestra base de datos SQL.</p>
+        </div>
+      </aside>
+
+      <!-- Cuadrícula -->
+      <section class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div *ngFor="let prod of productosFiltrados"
+          class="bg-white rounded-xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <img [src]="prod.imagenPrincipal" [alt]="prod.nombre" class="w-full h-36 object-contain mb-3 rounded-lg bg-slate-50 p-2" />
+            <h4 class="font-bold text-sm text-slate-800">{{ prod.nombre }}</h4>
+            <p class="text-xs text-slate-500 font-semibold mt-0.5">${{ prod.precio.toFixed(2) }}</p>
+            <div class="flex items-center justify-between text-[11px] text-emerald-600 mt-2">
+              <span>Stock disponible ({{ prod.stock }})</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            </div>
+          </div>
+
+          <button (click)="abrirFicha(prod)"
+            class="mt-4 w-full border border-slate-200 hover:border-[#0052D4] text-[#0052D4] font-medium py-1.5 rounded-lg text-xs transition">
+            👁️ Ver producto
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+
+<!-- ========================================== -->
+<!-- PANTALLA 3: FICHA DEL PRODUCTO (MIXTA)     -->
+<!-- ========================================== -->
+<div *ngIf="vistaActual === 'ficha' && productoSeleccionado" class="min-h-screen flex bg-[#F4F7FB] font-sans">
+  <aside class="w-60 bg-[#021226] text-slate-300 flex flex-col justify-between p-5">
+    <div>
+      <div class="text-xl font-bold text-white mb-8">Electro<span class="text-[#00A8FF]">Smart</span></div>
+      <nav class="space-y-2 text-sm">
+        <button (click)="volverAlCatalogo()" class="w-full text-left px-3 py-2 rounded-lg hover:bg-slate-800">🏠 Inicio</button>
+        <button (click)="volverAlCatalogo()" class="w-full text-left px-3 py-2 rounded-lg bg-[#0052D4] text-white font-medium">🛍️ Catálogo</button>
+        <div class="px-3 py-2 opacity-60">🏷️ Ofertas</div>
+        <div class="px-3 py-2 opacity-60">🤍 Favoritos</div>
+        <div class="px-3 py-2 opacity-60">📦 Mis pedidos</div>
+        <div class="px-3 py-2 opacity-60">💬 Reseñas</div>
+      </nav>
+    </div>
+
+    <div class="bg-[#071D3B] border border-slate-700 rounded-xl p-4 text-xs">
+      <p class="font-bold text-white mb-1">🗄️ Consulta Mixta</p>
+      <p class="text-slate-400">Datos del producto desde SQL y reseñas desde NoSQL en una sola vista.</p>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-8 max-w-6xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-3">
+        <button (click)="volverAlCatalogo()" class="text-sm text-[#0052D4] hover:underline">← Volver</button>
+        <h1 class="text-2xl font-bold text-[#021226]">Ficha del producto</h1>
+      </div>
+      <span class="bg-white border border-slate-200 text-xs text-slate-600 px-3 py-1 rounded-lg">
+        Pantalla 3 · Consulta Mixta
+      </span>
+    </div>
+
+    <!-- Datos SQL -->
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <div>
+        <div class="bg-slate-50 rounded-xl p-4 h-64 flex items-center justify-center mb-3">
+          <img [src]="imagenActiva" class="max-h-full object-contain" />
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+          <img *ngFor="let img of productoSeleccionado.galeria" [src]="img" (click)="imagenActiva = img"
+            class="h-14 w-full object-contain border rounded-lg p-1 cursor-pointer hover:border-[#0052D4]" />
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center">
+        <span class="w-fit bg-blue-50 text-[#0052D4] text-xs font-semibold px-3 py-1 rounded-full mb-3">
+          🗄️ Datos del producto 
+        </span>
+        <h2 class="text-3xl font-bold text-slate-900">{{ productoSeleccionado.nombre }}</h2>
+        <p class="text-sm text-slate-500 mb-4">{{ productoSeleccionado.marca }}</p>
+        <p class="text-3xl font-bold text-[#021226] mb-3">${{ productoSeleccionado.precio.toFixed(2) }}</p>
+        <p class="text-sm text-emerald-600 font-medium mb-6">✅ Stock disponible ({{ productoSeleccionado.stock }} unidades)</p>
+
+        <button (click)="agregarAlCarrito(productoSeleccionado.nombre)"
+          class="w-full bg-[#0052D4] hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition">
+          🛒 Agregar al Carrito
+        </button>
+      </div>
+    </div>
+
+    <!-- Reseñas NoSQL -->
+    <div>
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-bold text-[#021226]">Conoce la experiencia de otros compradores</h3>
+        <span class="bg-cyan-50 text-cyan-700 border border-cyan-200 text-xs font-semibold px-3 py-1 rounded-full">
+          🍃 Reseñas de la comunidad · NoSQL
+        </span>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 divide-y divide-slate-100">
+        <div *ngIf="productoSeleccionado.resenas.length === 0" class="p-6 text-center text-sm text-slate-400">
+          Aún no hay reseñas registradas para este producto.
+        </div>
+        
+        <div *ngFor="let r of productoSeleccionado.resenas" class="p-5 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+          <div class="md:col-span-2 text-center">
+            <div class="text-cyan-500 text-sm">★★★★★</div>
+            <div class="text-xs font-bold text-slate-700 mt-1">{{ r.calificacion.toFixed(1) }}</div>
+          </div>
+
+          <div class="md:col-span-6 flex items-start gap-3">
+            <div class="w-9 h-9 rounded-full bg-blue-100 text-[#0052D4] font-bold text-xs flex items-center justify-center shrink-0">
+              {{ r.iniciales }}
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-slate-800">{{ r.usuario }}</h4>
+              <p class="text-xs text-slate-600 mt-1">{{ r.comentario }}</p>
+            </div>
+          </div>
+
+          <div class="md:col-span-2 flex gap-2">
+            <img *ngFor="let foto of r.imagenes" [src]="foto" class="w-12 h-12 rounded-lg object-cover border" />
+          </div>
+
+          <div class="md:col-span-2 text-right text-xs text-slate-400">
+            📅 {{ r.fecha }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
