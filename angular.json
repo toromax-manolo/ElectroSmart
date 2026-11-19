@@ -29,10 +29,12 @@
             ],
             "server": "src/main.server.ts",
             "outputMode": "server",
-            "security": {
-              "allowedHosts": []
+           "security": {
+              "allowedHosts": [
+                "electrosmart-wn6r.onrender.com"
+              ]
             },
-            "ssr": {
+                        "ssr": {
               "entry": "src/server.ts"
             }
           },
